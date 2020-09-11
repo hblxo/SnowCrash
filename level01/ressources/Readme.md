@@ -9,17 +9,24 @@
 
 ?????
 - Le fichier du level00 se nommant `John`, installer John pour décrypter le password trouvé :
+  *sur MacOs*
     ```
     $> cd /tmp
-    $> curl https://www.openwall.com/john/k/john-1.9.0-jumbo-1.tar.xz
-    $> md john && tar -xzvf john-1.9.0-jumbo-1.tar.xz -C john/
-    $> cd john/src/
-    $> ./configure && make 
+    $> curl -L --output john.zip https://download.openwall.net/pub/projects/john/contrib/macosx/john-1.8.0.9-jumbo-macosx_sse4.zip
+    $> unzip -q john.zip ; mv john-1.8.0.9-jumbo-macosx_sse4 john
+    $> cd john/run/
+    $> ./john --help
     ```
 
 - Lancer John sur la chaine `42hDRfypTqqnw` :
-  ```$> 
+  ```$> echo "42hDRfypTqqnw" > password
+    $> ./john password --show
   ```
+  > ?:abcdefg
+  > 1 password hash cracked, 0 left
+
+- getflag
+  > f2av5il02puano7naaf6adaaf
 
 
 
