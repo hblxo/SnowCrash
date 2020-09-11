@@ -1,6 +1,6 @@
 ## Démarche
 
-- Le *README.md* de la vidéo (indisponible dans l'iso) contient :
+- Le *README* de la vidéo (indisponible dans l'iso) contient :
   > FIND this first file who can run only as flag00
 
 - Afficher les fichiers que seul le user `flag00` peut run :
