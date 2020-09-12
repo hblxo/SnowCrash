@@ -15,6 +15,8 @@
     $> scp -P 4242 level02@192.168.0.17:/home/user/level02/level02.pcap .
     ```
 
+>    Password: ft_wandr...NDRel.L0L
+
 
 ## Ressources
 - https://www.wireshark.org/#download
