@@ -45,6 +45,9 @@
 - Remplacer les points par le caractère non imprimable `7f` (qui correspond à la fonction `delete`) et le dernier `0d` (correspondant à la touche `return`) :
   `ft_waNDReL0L`
 
+- getflag
+  > kooda2puivaav1idi4f57q8iq  
+
 
 ## Ressources
 - https://www.wireshark.org/#download
