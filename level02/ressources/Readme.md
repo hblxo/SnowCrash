@@ -16,6 +16,8 @@
 - Wireshark permet de voir le contenu de chaque paquet. Le 43ème affiche `password`.
 - En suivant le flux TCP, on voit les caractères suivants :
     >    Password: ft_wandr...NDRel.L0L
+    
+    *les `.`désignent des caractères non-imprimables*  
 - En affichant la sortie en hexa à la place d'UTF-8, on obtient le résultat suivant :
 
 ```
@@ -45,7 +47,7 @@
 - Remplacer les points par le caractère non imprimable `7f` (qui correspond à la fonction `delete`) et le dernier `0d` (correspondant à la touche `return`) :
   `ft_waNDReL0L`
 
-- getflag
+- `getflag`
   > kooda2puivaav1idi4f57q8iq  
 
 
